@@ -48,6 +48,8 @@ L'inconvénient, outre que cela est moins réaliste, est que les données rajout
 disparaissent à chaque démarrage, à part quelques données de test rajoutées
 à l'initialisation (par  
 
+
+## Don't do it !! 
 ### PostgreSQL (à créer)
 
 Installer PostgreSQL : https://dbeaver.io/download/

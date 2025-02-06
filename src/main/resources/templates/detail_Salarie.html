@@ -8,37 +8,10 @@
     <link href="./static/font-awesome.css" rel="stylesheet">
 </head>
 <body>
-
-<div>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="http://localhost:8080/">Gestion des salariés</a>
-        <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
-                class="navbar-toggler"
-                data-target="#navbarSupportedContent" data-toggle="collapse" type="button">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li>
-                    <a class="nav-link"
-                       href="http://localhost:8080/salaries?page=0&amp;size=10&amp;sortProperty=nom&amp;sortDirection=ASC">Liste
-                        des salariés <span class="badge badge-primary">26</span></a></li>
-            </ul>
-
-            <form action="http://localhost:8080/salaries" class="form-inline my-2 my-lg-0" method="GET" role="search">
-                <div class="form-group form-inline">
-                    <input class="form-control" name="nom" placeholder="Rechercher un nom" type="text">
-                </div>
-                <button class="btn btn-outline-success ml-2 my-2 my-sm-0" type="submit">Rechercher</button>
-            </form>
-        </div>
-    </nav>
-</div>
-
+<!--Avec un th:replace le but est ici de repiquer la navBar proprement en therme de sémantique HTML sans avoir une div englobante inutile-->
+<div th:replace="~{common :: salaries(${countSalaries})}"></div>
 <div class="container">
     <div th:text="#{msg.salarie}"></div><!-- TODO better messages example -->
-
     <h2>Détail du salarié</h2>
     <form class="row" id="saveForm" method="post"
           th:action="${aide.id != null} ? '/salaries/aide/update/' + ${aide.id} : '/salaries/aide/create'">

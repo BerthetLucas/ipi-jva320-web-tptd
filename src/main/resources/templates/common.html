@@ -1,0 +1,24 @@
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<nav class="navbar navbar-expand-lg navbar-light bg-light" th:fragment="salaries(count)">
+    <a class="navbar-brand" href="http://localhost:8080/">Gestion des salariés</a>
+    <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+            class="navbar-toggler"
+            data-target="#navbarSupportedContent" data-toggle="collapse" type="button">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li><a class="nav-link"
+                   href="http://localhost:8080/salaries?page=0&amp;size=10&amp;sortProperty=nom&amp;sortDirection=ASC">Liste
+                des salariés <span class="badge badge-primary" th:text="${count}">0</span></a></li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0" method="GET" role="search" th:action="@{/salaries}">
+            <div class="form-group">
+                <input class="form-control" name="nom" placeholder="Rechercher un nom" type="text">
+            </div>
+            <button class="btn btn-outline-success ml-2 my-2 my-sm-0" type="submit">Rechercher</button>
+        </form>
+    </div>
+</nav>
+</html>

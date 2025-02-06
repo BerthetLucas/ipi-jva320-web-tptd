@@ -24,6 +24,10 @@ public class EmployeeController {
     @GetMapping("/salaries")
     // Permet d'optimiser en ayant seulement un seul controller qui fait un trie sur les noms avec une valeur non obligatoire.
     public String salariesList(final ModelMap model, @RequestParam(value = "nom", required = false) final String nom) {
+
+        Long countSalaries = salarieAideADomicileService.countSalaries();
+        model.put("countSalaries", countSalaries);
+
         if (nom != null) {
             List<SalarieAideADomicile> foundSalarie = salarieAideADomicileService.getSalaries(nom);
             model.put("salaries", foundSalarie);
@@ -41,8 +45,10 @@ public class EmployeeController {
     @GetMapping("/salaries/{id}")
     public String salaries(final ModelMap model, @PathVariable final Long id) throws Exception {
         SalarieAideADomicile aide = salarieAideADomicileService.getSalarie(id);
-        model.put("aide", aide);
+        Long countSalaries = salarieAideADomicileService.countSalaries();
 
+        model.put("countSalaries", countSalaries);
+        model.put("aide", aide);
         if (aide == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
@@ -53,7 +59,11 @@ public class EmployeeController {
     @GetMapping("/salaries/aide/new")
     public String newSalarie(final ModelMap model) {
         SalarieAideADomicile newSalarie = new SalarieAideADomicile();
+        Long countSalaries = salarieAideADomicileService.countSalaries();
+
+        model.put("countSalaries", countSalaries);
         model.put("aide", newSalarie);
+
         return "detail_Salarie";
     }
 
@@ -72,6 +82,9 @@ public class EmployeeController {
     @GetMapping("/salaries/aide/delete/{id}")
     public String deleteConfirmation(@PathVariable final Long id, final ModelMap model) {
         SalarieAideADomicile salarieToDelete = salarieAideADomicileService.getSalarie(id);
+        Long countSalaries = salarieAideADomicileService.countSalaries();
+        model.put("countSalaries", countSalaries);
+        
         model.put("salarieToDelete", salarieToDelete);
         return "delete_Confirmation";
     }

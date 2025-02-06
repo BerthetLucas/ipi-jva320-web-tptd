@@ -1,20 +1,27 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>Confirmation de Suppression</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/bootstrap.min.css" rel="stylesheet">
+    <link href="./static/font-awesome.css" rel="stylesheet">
 </head>
-<body class="d-flex justify-content-center align-items-center vh-100 bg-light">
-<div class="card shadow p-4 text-center" style="max-width: 400px;">
-    <h4 class="mb-3">Êtes-vous sûr de vouloir supprimer <span th:text="${salarieToDelete.nom}"></span> de la base ?</h4>
-    <form class="d-flex justify-content-between" id="saveForm" method="post"
-          th:action="@{/salaries/aide/deleteConfirmation/{id}(id=${salarieToDelete.id})}">
-        <input class="btn btn-danger" type="submit" value="Oui, supprimer"/>
-        <a class="btn btn-secondary" th:href="@{/salaries/{id}(id=${salarieToDelete.id})}">Annuler</a>
-    </form>
+<body>
+<!--Avec un th:replace le but est ici de repiquer la navBar proprement en therme de sémantique HTML sans avoir une div englobante inutile-->
+<div th:replace="~{common :: salaries(${countSalaries})}"></div>
+<div class="d-flex justify-content-center align-items-center bg-light vh-100">
+    <div class="card shadow p-4 text-center" style="max-width: 400px;">
+        <h4 class="mb-3">Êtes-vous sûr de vouloir supprimer <span th:text="${salarieToDelete.nom}"></span> de la base ?
+        </h4>
+        <form class="d-flex justify-content-between" id="saveForm" method="post"
+              th:action="@{/salaries/aide/deleteConfirmation/{id}(id=${salarieToDelete.id})}">
+            <input class="btn btn-danger" type="submit" value="Oui, supprimer"/>
+            <a class="btn btn-secondary" th:href="@{/salaries/{id}(id=${salarieToDelete.id})}">Annuler</a>
+        </form>
+    </div>
 </div>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

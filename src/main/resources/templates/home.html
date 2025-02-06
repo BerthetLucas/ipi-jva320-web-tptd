@@ -7,29 +7,8 @@
     <link rel="stylesheet" href="./static/font-awesome.css">
 </head>
 <body>
-
-<div>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="http://localhost:8080/">Aide à domicile RH - gestion des salariés</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li><a href="http://localhost:8080/salaries?page=0&amp;size=10&amp;sortProperty=id&amp;sortDirection=ASC" class="nav-link">Liste des salariés <span class="badge badge-primary" th:text="${countSalaries}">26</span></a></li>
-            </ul>
-
-            <form class="form-inline my-2 my-lg-0" role="search" action="http://localhost:8080/salaries" method="GET">
-                <div class="form-group">
-                    <input name="matricule" class="form-control" placeholder="Rechercher un nom" type="text">
-                </div>
-                <button type="submit" class="btn btn-outline-success ml-2 my-2 my-sm-0">Rechercher</button>
-            </form>
-        </div>
-    </nav>
-</div>
-
+<!--Avec un th:replace le but est ici de repiquer la navBar proprement en therme de sémantique HTML sans avoir une div englobante inutile-->
+<div th:replace="~{common :: salaries(${countSalaries})}"></div>
 <div class="container mt-2">
     <div class="jumbotron">
         <h1 th:text="${#messages.msg('msg.salarie')}"></h1>

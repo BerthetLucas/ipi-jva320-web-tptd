@@ -40,12 +40,12 @@
     <div th:text="#{msg.salarie}"></div><!-- TODO better messages example -->
 
     <h2>Détail du salarié</h2>
-
-    <form class="row" id="saveForm" method="post" th:action="@{/salaries/aide/create}">
+    <form class="row" id="saveForm" method="post"
+          th:action="${aide.id != null} ? '/salaries/aide/update/' + ${aide.id} : '/salaries/aide/create'">
         <div class="col-lg-6">
             <div class="form-group">
                 <label class="form-control-label" for="id">ID</label>
-                <input class="form-control" disabled="true" id="id" name="id" th:value="${aide.id}" type="text"
+                <input class="form-control" disabled="false" id="id" name="id" th:value="${aide.id}" type="text"
                        value="10">
 
                 <label class="form-control-label" for="nom">Nom</label>

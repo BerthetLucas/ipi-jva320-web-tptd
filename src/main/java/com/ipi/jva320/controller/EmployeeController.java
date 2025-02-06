@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
-import java.util.concurrent.ExecutionException;
+
 
 @Controller
 public class EmployeeController {
@@ -61,4 +61,19 @@ public class EmployeeController {
         salarieAideADomicileService.updateSalarieAideADomicile(updateSalarie);
         return "redirect:/salaries";
     }
+
+    @GetMapping("/salaries/aide/delete/{id}")
+    public String deleteConfirmation(@PathVariable final Long id, final ModelMap model) {
+        SalarieAideADomicile salarieToDelete = salarieAideADomicileService.getSalarie(id);
+        model.put("salarieToDelete", salarieToDelete);
+        return "delete_Confirmation";
+    }
+
+    @PostMapping("/salaries/aide/deleteConfirmation/{id}")
+    public String deleteConfirmation(@PathVariable final Long id) throws SalarieException {
+        salarieAideADomicileService.deleteSalarieAideADomicile(id);
+        return "redirect:/salaries";
+    }
+
+
 }

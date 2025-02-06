@@ -89,8 +89,6 @@
                 </div>
             </div>
         </div>
-
-
         <div class="col-lg-6">
             <div>
                 <label class="form-control-label" for="nom">joursTravaillesAnneeNMoins1</label>
@@ -143,7 +141,7 @@
         <div class="col-lg-6">
             <input class="btn btn-primary" form="saveForm" type="submit"
                    value="Enregistrer">
-            <a class="btn btn-danger">Supprimer</a>
+            <a class="btn btn-danger" th:href="@{'/salaries/aide/delete/' + ${aide.id}}">Supprimer</a>
         </div>
     </div>
 

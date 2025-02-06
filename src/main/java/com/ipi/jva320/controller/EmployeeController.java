@@ -7,10 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
@@ -25,10 +22,20 @@ public class EmployeeController {
     private SalarieAideADomicileService salarieAideADomicileService;
 
     @GetMapping("/salaries")
-    public String salariesList(final ModelMap model) {
-        List<SalarieAideADomicile> salaries = salarieAideService.getSalaries();
-        model.put("salaries", salaries);
-        return "list";
+    // Permet d'optimiser en ayant seulement un seul controller qui fait un trie sur les noms avec une valeur non obligatoire.
+    public String salariesList(final ModelMap model, @RequestParam(value = "nom", required = false) final String nom) {
+        if (nom != null) {
+            List<SalarieAideADomicile> foundSalarie = salarieAideADomicileService.getSalaries(nom);
+            model.put("salaries", foundSalarie);
+            if (foundSalarie.isEmpty()) {
+                throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+            }
+            return "list";
+        } else {
+            List<SalarieAideADomicile> salaries = salarieAideService.getSalaries();
+            model.put("salaries", salaries);
+            return "list";
+        }
     }
 
     @GetMapping("/salaries/{id}")
@@ -77,3 +84,5 @@ public class EmployeeController {
 
 
 }
+
+

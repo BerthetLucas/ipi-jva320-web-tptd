@@ -30,6 +30,7 @@ public class EmployeeController {
         Long countSalaries = salarieAideADomicileService.countSalaries();
         model.put("countSalaries", countSalaries);
         model.put("page", page);
+        model.put("size", pageable.getPageSize());
 
         List<SalarieAideADomicile> salariesToDisplay;
 

@@ -48,12 +48,13 @@
                 </div>
                 <div class="col-lg-6">
                     <ul class="pagination">
-                        <li class="page-item">
+                        <li class="page-item"
+                            th:attr="aria-disabled=${page == 0}, class=${page == 0 ? 'page-item disabled' : 'page-item'}">
                             <a class="page-link"
-                               th:href="'/salaries?page=' + (${page} > 0 ? ${page} - 1 : ${page})">«</a>
+                               th:href="'/salaries?page=' +  ${page - 1}">«</a>
                         </li>
-                        <li><a class="page-link" th:text="'Page ' + ${page}">Page 1</a></li>
-                        <li class="page-item ">
+                        <li><a class="page-link" th:text="'Page ' + ${page + 1}">Page 1</a></li>
+                        <li th:attr="aria-disabled=${(page+1) * size >= countSalaries}, class=${(page+1) * size >= countSalaries ? 'page-item disabled' : 'page-item'}">
                             <a class="page-link"
                                th:href="'salaries?page=' + ${page + 1}">»</a>
                     </ul>

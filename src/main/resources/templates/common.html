@@ -10,7 +10,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li><a class="nav-link"
-                   href="http://localhost:8080/salaries?page=0&amp;size=10&amp;sortProperty=nom&amp;sortDirection=ASC">Liste
+                   th:href="@{/salaries}">Liste
                 des salariés <span class="badge badge-primary" th:text="${count}">0</span></a></li>
         </ul>
         <form class="form-inline my-2 my-lg-0" method="GET" role="search" th:action="@{/salaries}">

@@ -38,18 +38,24 @@
                 </tbody>
             </table>
             <div class="row">
-                <div class="col-lg-6"><p>Affichage des salariés 1 à 10 sur un total de <span>11</span></p>
+                <div class="col-lg-6"><p
+                        th:text="'Salarié de ' + ${min} +  ' à ' + ${max} + '. Affichage par 5 pour un total de: ' + ${countSalaries}">
+                    Affichage des salariés 1 à 5
+                    sur un total
+                    de <span
+                        th:text="${countSalaries}">11</span>
+                </p>
                 </div>
                 <div class="col-lg-6">
                     <ul class="pagination">
-                        <li class="page-item disabled">
+                        <li class="page-item">
                             <a class="page-link"
-                               href="/salaries?page=-1&amp;size=10&amp;sortProperty=nom&amp;sortDirection=ASC">«</a>
+                               th:href="'/salaries?page=' + (${page} > 0 ? ${page} - 1 : ${page})">«</a>
                         </li>
-                        <li><a class="page-link" href="#">Page 1</a></li>
+                        <li><a class="page-link" th:text="'Page ' + ${page}">Page 1</a></li>
                         <li class="page-item ">
                             <a class="page-link"
-                               href="/salaries?page=1&amp;size=10&amp;sortProperty=nom&amp;sortDirection=ASC">»</a></li>
+                               th:href="'salaries?page=' + ${page + 1}">»</a>
                     </ul>
                 </div>
             </div>
